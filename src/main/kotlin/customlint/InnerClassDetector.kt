@@ -7,6 +7,7 @@ import java.util.*
 import com.intellij.psi.PsiAnonymousClass
 import com.intellij.psi.PsiClass
 import com.android.tools.lint.detector.api.JavaContext
+import org.jetbrains.uast.UClass
 
 class InnerClassDetector : Detector(), Detector.UastScanner {
     companion object {
@@ -22,9 +23,13 @@ class InnerClassDetector : Detector(), Detector.UastScanner {
                 Implementation(InnerClassDetector::class.java, Scope.JAVA_FILE_SCOPE))
     }
 
-    @Nullable
     override fun applicableSuperClasses(): List<String>? {
         return Collections.singletonList("me.lunacat.multiadapter.MultiViewHolder")
+    }
+
+    override fun visitClass(context: JavaContext, declaration: UClass) {
+        super.visitClass(context, declaration)
+        checkClass(context, declaration)
     }
 
     override fun checkClass(@NonNull context: JavaContext, @NonNull declaration: PsiClass) {
