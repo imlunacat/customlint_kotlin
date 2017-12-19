@@ -8,7 +8,7 @@ import java.io.File
 class IssueDetectorTest {
     @Throws(IOException::class)
     @Test
-    fun testRaw() {
+    fun testInnerClass() {
         val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
         val inner = load(fileName = "src/me/lunacat/multiadapter/InnerClassMultiViewHolder.java")
         val expect = """
@@ -23,6 +23,7 @@ class IssueDetectorTest {
         )
                 .sdkHome(File("/Users/lunacat/Documents/android-sdk"))
                 .issues(InnerClassDetector.ISSUE)
+                .incremental()
                 .run()
                 .expect(expect)
     }
