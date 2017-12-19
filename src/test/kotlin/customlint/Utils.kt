@@ -11,6 +11,6 @@ object Utils {
         val classLoader = clazz.classLoader
         val f = File(classLoader.getResource(resourceName)!!.file)
 
-        return Files.readAllLines(f.toPath()).joinToString("")
+        return Files.readAllLines(f.toPath()).joinToString("\n")
     }
 }
