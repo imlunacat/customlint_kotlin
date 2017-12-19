@@ -23,11 +23,30 @@ class IssueDetectorTest {
         )
                 .sdkHome(File("/Users/lunacat/Documents/android-sdk"))
                 .issues(InnerClassDetector.ISSUE)
-                .incremental()
                 .run()
                 .expect(expect)
     }
 
+    @Throws(IOException::class)
+    @Test
+    fun testAnonymousClass() {
+        val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
+        val anonymous = load(fileName = "src/me/lunacat/multiadapter/AnonymousViewHolder.java")
+        val expect = """
+                |src/AnonymousViewHolder.java:5: Warning: Possible inner class or anonymous class [PossibleInnerClassOrAnonymousClass]
+                |     MultiViewHolder mh = new MultiViewHolder<String>(){
+                |                              ~~~~~~~~~~~~~~~~~~~~~~~
+                |0 errors, 1 warnings
+            """.trimMargin()
+        lint().files(
+                java(vh),
+                java(anonymous)
+        )
+                .sdkHome(File("/Users/lunacat/Documents/android-sdk"))
+                .issues(InnerClassDetector.ISSUE)
+                .run()
+                .expect(expect)
+    }
 
     private fun load(fileName: String): String {
         return Utils.readResource(
