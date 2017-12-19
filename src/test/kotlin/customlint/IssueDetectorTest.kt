@@ -9,14 +9,6 @@ class IssueDetectorTest {
     @Throws(IOException::class)
     @Test
     fun testRaw() {
-
-//        val backgroundLoader = load(
-//                fileName = "BackgroundLoader.java")
-//        val issueBackgroundLoader = load(
-//                fileName = "IssuedBackgroundLoader.java")
-//        val noIssueBackgroundLoader = load(
-//                fileName = "NoIssuedBackgroundLoader.java")
-
         val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
         val inner = load(fileName = "src/me/lunacat/multiadapter/InnerClassMultiViewHolder.java")
         val expect = """
