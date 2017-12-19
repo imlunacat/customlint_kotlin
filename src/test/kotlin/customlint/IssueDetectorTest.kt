@@ -19,6 +19,12 @@ class IssueDetectorTest {
 
         val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
         val inner = load(fileName = "src/me/lunacat/multiadapter/InnerClassMultiViewHolder.java")
+        val expect = """
+                |src/InnerClassMultiViewHolder.java:6: Warning: Possible inner class or anonymous class [PossibleInnerClassOrAnonymousClass]
+                |    public class VH extends MultiViewHolder<String> {
+                |                 ~~
+                |0 errors, 1 warnings
+            """.trimMargin()
         lint().files(
                 java(vh),
                 java(inner)
@@ -26,7 +32,7 @@ class IssueDetectorTest {
                 .sdkHome(File("/Users/lunacat/Documents/android-sdk"))
                 .issues(InnerClassDetector.ISSUE)
                 .run()
-                .expectMatches("Possible inner class or anonymous class")
+                .expect(expect)
     }
 
 
