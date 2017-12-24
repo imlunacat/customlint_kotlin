@@ -9,8 +9,8 @@ class IssueDetectorTest {
     @Throws(IOException::class)
     @Test
     fun testInnerClass() {
-        val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
-        val inner = load(fileName = "src/me/lunacat/multiadapter/InnerClassMultiViewHolder.java")
+        val vh = load(fileName = "multiadapter/MultiViewHolder.java")
+        val inner = load(fileName = "multiadapter/InnerClassMultiViewHolder.java")
         val expect = """
                 |src/InnerClassMultiViewHolder.java:6: Warning: Possible inner class or anonymous class [PossibleInnerClassOrAnonymousClass]
                 |    public class VH extends MultiViewHolder<String> {
@@ -30,8 +30,8 @@ class IssueDetectorTest {
     @Throws(IOException::class)
     @Test
     fun testAnonymousClass() {
-        val vh = load(fileName = "src/me/lunacat/multiadapter/MultiViewHolder.java")
-        val anonymous = load(fileName = "src/me/lunacat/multiadapter/AnonymousViewHolder.java")
+        val vh = load(fileName = "multiadapter/MultiViewHolder.java")
+        val anonymous = load(fileName = "multiadapter/AnonymousViewHolder.java")
         val expect = """
                 |src/AnonymousViewHolder.java:5: Warning: Possible inner class or anonymous class [PossibleInnerClassOrAnonymousClass]
                 |     MultiViewHolder mh = new MultiViewHolder<String>(){
